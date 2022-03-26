@@ -1,0 +1,9 @@
+#permit the approaches to h2 db with web console
+spring:
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+  jpa:
+    defer-datasource-initialization: true
