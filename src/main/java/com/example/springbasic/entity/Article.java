@@ -5,12 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity //DB can recognize the object
+@Entity //DB can recognize the object(make a table for the object class)
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -18,7 +15,7 @@ import javax.persistence.Id;
 public class Article {
 
     @Id //unique key
-    @GeneratedValue //1, 2, 3,... make by itself
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //DB make id automatically
     private Long id;
 
     @Column //It can be linked to the table of DB
