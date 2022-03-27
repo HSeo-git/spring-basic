@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,5 +93,19 @@ public class ArticleController {
         }
         //3. redirect to the result page
         return "redirect:/articles/"+articleEntity.getId();
+    }
+
+    @GetMapping("/articles/{id}/delete")
+    public String delete(@PathVariable Long id, RedirectAttributes rttr) {
+
+        //1. get the subject to be deleted
+        Article target = articleRepository.findById(id).orElse(null);
+        //2. delete the subject
+        if (target != null) {
+            articleRepository.delete(target);
+            rttr.addFlashAttribute("msg", "delete completed");
+        }
+        //3. redirect to the final page
+        return "redirect:/articles";
     }
 }
