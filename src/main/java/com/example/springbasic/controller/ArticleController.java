@@ -1,8 +1,11 @@
 package com.example.springbasic.controller;
 
 import com.example.springbasic.dto.ArticleForm;
+import com.example.springbasic.dto.CommentDto;
 import com.example.springbasic.entity.Article;
+import com.example.springbasic.entity.Comment;
 import com.example.springbasic.repository.ArticleRepository;
+import com.example.springbasic.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,9 @@ public class ArticleController {
 
     @Autowired //automatically linked to the object which Spring Boot has already prepared
     private ArticleRepository articleRepository;
+
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/articles/new")
     public String newArticleForm() {
@@ -50,9 +56,11 @@ public class ArticleController {
 
         //1. get data with id
         Article articleEntity = articleRepository.findById(id).orElse(null);
+        List<CommentDto> commentDtos = commentService.comments(id);
 
         //2. apply the data to the model
         model.addAttribute("article", articleEntity);
+        model.addAttribute("commentDtos",commentDtos);
 
         //3. set the page
         return "articles/show";
