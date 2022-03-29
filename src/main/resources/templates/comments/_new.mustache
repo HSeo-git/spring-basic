@@ -16,6 +16,45 @@
             {{#article}}
                 <input type="hidden" id="new-comment-article-id" value="{{id}}">
             {{/article}}
+            <!--submit button-->
+            <button type="button" class="btn btn-outline-primary btn-sa" id="comment-create-btn">write comment</button>
         </form>
     </div>
 </div>
+
+<script>
+    {
+        //make submit button into variable(id: comment-create-btn) with querySelector method
+       const commentCreateBtn = document.querySelector("#comment-create-btn");
+
+        //recognize button click event
+        commentCreateBtn.addEventListener("click", function () {
+            //new comment object(get the id value with sharp)
+            const comment = {
+                nickname: document.querySelector("#new-comment-nickname").value,
+                body: document.querySelector("#new-comment-body").value,
+                article_id: document.querySelector("#new-comment-article-id").value
+            };
+
+            //console check
+            console.log(comment);
+
+            //fetch() - send Talend API request to JS
+            const url = "/api/articles/" + comment.article_id + "/comments";
+            fetch(url, {
+                method: "post",
+                body: JSON.stringify(comment), //comment JS -> JSON
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(response => {
+                //http response code message
+                const msg = (response.ok) ? "success" : "fail";
+                alert(msg);
+                //page reset
+                window.location.reload()
+            });
+        });
+    }
+
+</script>
