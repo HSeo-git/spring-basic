@@ -1,0 +1,21 @@
+<div class="card m-2" id="comments-new">
+    <div class="card-body">
+        <!--comment creation form-->
+        <form>
+            <!-- nicekname -->
+            <div class ="mb-3">
+                <label class="form-label">nickname</label>
+                <input class="form-control form-control-sm" id="new-comment-nickname">
+            </div>
+            <!--content-->
+            <div class="mb-3">
+                <label class="form-label">content</label>
+                <textarea class="form-control form-control-sm" rows="3" id="new-comment-body"></textarea>
+            </div>
+            <!--hidden input(comment should have its articleID(FK) info)-->
+            {{#article}}
+                <input type="hidden" id="new-comment-article-id" value="{{id}}">
+            {{/article}}
+        </form>
+    </div>
+</div>
