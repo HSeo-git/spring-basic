@@ -8,6 +8,10 @@
                 data-bs-id="{{id}}" data-bs-nickname="{{nickname}}" data-bs-body="{{body}}" data-bs-article-id="{{articleId}}">
                     Edit
                 </button>
+                <!--comment delete btn-->
+                <button type="button" class="btn btn-sm btn-outline-danger comment-delete-btn" data-comment-id="{{id}}">
+                    Delete
+                </button>
             </div>
             <div class="card-body">
             {{body}}
@@ -99,5 +103,41 @@
                 window.location.reload();
             });
         });
+    }
+</script>
+
+<!--comment delete JS-->
+<script>
+    {
+        //select delete btn
+        //to activate all delete btn, use querySelectorAll
+        const commentDeleteBtns= document.querySelectorAll(".comment-delete-btn");
+        //delete btn event
+        //register each btn's event
+        commentDeleteBtns.forEach(btn => {
+            btn.addEventListener("click", (event) => {
+                //get the event element
+                const commentDeleteBtn = event.srcElement;
+
+                //get the id of comment to be deleted
+                const commentID = commentDeleteBtn.getAttribute("data-comment-id");
+                console.log(`delete : ${commentID}`)
+
+                //call delete API and act
+                const url = `/api/comments/${commentID}`
+                fetch(url, {
+                    method: "DELETE"
+                }).then(response => {
+                    //delete fail
+                    if (!response.ok) {
+                        alert("fail");
+                        return;
+                    }
+                    //delete success
+                    const target = document.querySelector(`#comments-${commentID}`);
+                    target.remove();
+                });
+            })
+        })
     }
 </script>
