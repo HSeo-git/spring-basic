@@ -12,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @ToString
 @Getter
+@Table(name = "article")
 public class Article {
 
     @Id //unique key
