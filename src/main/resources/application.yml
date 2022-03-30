@@ -7,12 +7,20 @@ spring:
         web-allow-others: true
   jpa:
     defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
     properties:  #for a good-looking
       hibernate:
         format_sql: true
+
   datasource: #fix the DB URL
     generate-unique-name: false #don't make unique URL
-    url: jdbc:h2:mem:testdb #set fixed URL
+    #url: jdbc:h2:mem:testdb #set fixed URL (<- previous url)
+    url: jdbc:postgresql://127.0.0.1:5432/springbasicpostgres #link to postgreSQL
+    username: gomgom
+    password: hg
+    data: classpath:data.sql
+    initialization-mode: never
 
 #set JPA logging
 #print query at debug level
@@ -25,4 +33,3 @@ logging:
           descriptor:
             sql:
               BasicBinder: trace #show parameter
-
