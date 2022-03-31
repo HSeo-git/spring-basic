@@ -5,6 +5,7 @@ import com.example.springbasic.entity.Article;
 import com.example.springbasic.entity.Comment;
 import com.example.springbasic.repository.ArticleRepository;
 import com.example.springbasic.repository.CommentRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class CommentService {
     @Autowired
@@ -39,6 +41,8 @@ public class CommentService {
 
     @Transactional //it deals with db, so it needs roll-back when error happens.
     public CommentDto create(Long articleId, CommentDto dto) {
+
+
         //check the article and make exception
         //if error happens this phase, it doesn't go to the next steps(to do this use ElseThrow).
         Article article = articleRepository.findById(articleId).orElseThrow(()->new IllegalArgumentException("Fail to create! No article"));
