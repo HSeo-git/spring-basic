@@ -28,6 +28,11 @@ public class ArticleController {
     @Autowired
     private CommentService commentService;
 
+    @GetMapping("/greetings")
+    public String home(){
+        return "greetings";
+    }
+
     @GetMapping("/articles/new")
     public String newArticleForm() {
         return "articles/new";

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class DebuggingAspect {
 
     //select target method : CommentService#cerate()
-    @Pointcut("execution(* com.example.springbasic.service.CommentService.*(..))") //with *, apply this to all method in CommentService
+    @Pointcut("execution(* com.example.springbasic.api.*.*(..))") //with *, apply this to all method in api
     private void cut() {
 
     }

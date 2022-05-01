@@ -23,16 +23,6 @@ public class CommentService {
     private ArticleRepository articleRepository;
 
     public List<CommentDto> comments(Long articleId) {
-//        //check the list of comments
-//        List<Comment> comments = commentRepository.findByArticleId(articleId);
-//        //change entity -> dto
-//        List<CommentDto> dtos = new ArrayList<CommentDto>();
-//        for (int i = 0; i < comments.size(); i++) {
-//            Comment c = comments.get(i);
-//            CommentDto dto = CommentDto.createCommentDto(c);
-//            dtos.add(dto);
-//        }
-        //response
         return commentRepository.findByArticleId(articleId)
                 .stream()
                 .map(comment -> CommentDto.createCommentDto(comment))
