@@ -8,8 +8,8 @@ import lombok.ToString;
 import javax.persistence.*;
 
 @Entity //DB can recognize the object(make a table for the object class)
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 @Getter
 @Table(name = "article")

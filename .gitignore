@@ -35,3 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+/src/main/java/com/example/springbasic/ioc
+/src/main/java/com/example/springbasic/objectmapper
+/src/test/java/com/example/springbasic/ioc
+/src/test/java/com/example/springbasic/objectmapper
+
